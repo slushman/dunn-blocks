@@ -1,0 +1,26 @@
+.wp-block-dunn-blocks-linked-icon {
+	text-align: center;
+}
+
+.icon-link svg,
+.icon-link svg.dashicon {
+	background-color: #333;
+	border-radius: 50%;
+	fill: #fff;
+}
+
+@for $i from 20 through 100 {
+	.icon-size-#{ $i } svg,
+	.icon-size-#{ $i } svg.dashicon {
+		height: $i + unquote( "px" );
+		width: $i + unquote( "px" );
+	}
+}
+
+.quarter-three-quarters .wp-block-column:nth-child(odd) {
+	flex-basis: 25%;
+}
+
+.quarter-three-quarters .wp-block-column:nth-child(even) {
+	flex-basis: 75%;
+}
