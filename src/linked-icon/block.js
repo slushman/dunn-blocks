@@ -44,7 +44,10 @@ registerBlockType( 'dunn-blocks/linked-icon', {
 	},
 	save: ( props ) => {
 		return (
-			<Save { ...props } />
+			<Save
+				attributes={ props.attributes }
+				className={ props.className }
+			/>
 		);
 	},
 } );
