@@ -10,4 +10,4 @@
  */
 
 import './linked-icon/block.js';
-//import './image-with-hover-text/block.js';
+import './cover-image-with-button/block.js';
