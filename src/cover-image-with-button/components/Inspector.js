@@ -7,13 +7,13 @@ const {
 	ContrastChecker,
 	InspectorControls,
 	PanelColorSettings,
-	withColors
+	withColors,
 } = wp.editor;
 const {
 	PanelBody,
 	RangeControl,
 	TextControl,
-	withFallbackStyles
+	withFallbackStyles,
 } = wp.components;
 
 const applyFallbackStyles = withFallbackStyles( ( node, ownProps ) => {

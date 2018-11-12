@@ -2,10 +2,21 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { dimRatioToClass } from '../functions';
 
+const { getComputedStyle } = window;
+const { compose } = wp.compose;
 const { __ } = wp.i18n;
+const { withFallbackStyles } = wp.components;
 const { Component, Fragment } = wp.element;
-const { MediaPlaceholder, RichText } = wp.editor;
+const { MediaPlaceholder, RichText, withColors } = wp.editor;
 const ALLOWED_MEDIA_TYPES = [ 'image' ];
+
+const applyFallbackStyles = withFallbackStyles( ( node, ownProps ) => {
+	const { overlayColor } = ownProps;
+	const overlayColorValue = overlayColor && overlayColor.color;
+	return {
+		fallbackOverlayColor: overlayColorValue || ! node ? undefined : getComputedStyle( node ).backgroundColor,
+	};
+} );
 
 class Edit extends Component {
 	onSelectImage = ( media ) => {
@@ -20,9 +31,9 @@ class Edit extends Component {
 		} );
 	};
 	render() {
-		const { attributes, className, setAttributes } = this.props;
-		const { imageUrl, overlayColor, overlayContent, overlayOpacity } = attributes;
-		console.log( attributes );
+		const { attributes, className, overlayColor, setAttributes } = this.props;
+		const { imageUrl, overlayContent, overlayOpacity } = attributes;
+		console.log( { attributes } );
 
 		if ( ! imageUrl ) {
 			return (
@@ -50,7 +61,7 @@ class Edit extends Component {
 			dimRatioToClass( overlayOpacity ),
 		);
 		const wrapperStyles = {
-			backgroundColor: overlayColor,
+			backgroundColor: overlayColor.color,
 			backgroundImage: `url(${ imageUrl })`,
 		};
 		return (
@@ -74,4 +85,7 @@ Edit.propTypes = {
 	setAttributes: PropTypes.func,
 };
 
-export default Edit;
+export default compose( [
+	withColors( 'backgroundColor', { overlayColor: 'color' } ),
+	applyFallbackStyles,
+] )( Edit );
