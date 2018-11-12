@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { dimRatioToClass } from '../functions';
+import Button from './Button';
 
 const { getComputedStyle } = window;
 const { compose } = wp.compose;
@@ -32,8 +33,7 @@ class Edit extends Component {
 	};
 	render() {
 		const { attributes, className, overlayColor, setAttributes } = this.props;
-		const { imageUrl, overlayContent, overlayOpacity } = attributes;
-		console.log( { attributes } );
+		const { blockHeight, buttonText, buttonUrl, imageLabel, imageUrl, overlayContent, overlayOpacity } = attributes;
 
 		if ( ! imageUrl ) {
 			return (
@@ -54,25 +54,43 @@ class Edit extends Component {
 			);
 		}
 
-		const wrapperClasses = classNames(
+		const containerClasses = classNames(
 			className,
+			'cover-image-container'
+		);
+		const wrapperClasses = classNames(
 			'cover-image-with-button-wrap',
 			{ 'has-background-dim': 0 !== overlayOpacity },
+			{ 'has-button': buttonText && buttonUrl },
 			dimRatioToClass( overlayOpacity ),
 		);
 		const wrapperStyles = {
 			backgroundColor: overlayColor.color,
 			backgroundImage: `url(${ imageUrl })`,
+			height: blockHeight,
 		};
 		return (
-			<div className={ wrapperClasses } data-url={ imageUrl } style={ wrapperStyles }>
+			<div className={ containerClasses }>
+				<div className={ wrapperClasses } data-url={ imageUrl } style={ wrapperStyles }>
+					<RichText
+						className="overlay-content"
+						keepPlaceholderOnFocus={ true }
+						placeholder={ __( 'Overlay content' ) }
+						onChange={ ( newValue ) => setAttributes( { overlayContent: newValue } ) }
+						tagName="p"
+						value={ overlayContent }
+					/>
+					{ buttonText && buttonUrl &&
+						<Button text={ buttonText } url={ buttonUrl } />
+					}
+				</div>
 				<RichText
-					className="overlay-content"
+					className="image-label"
 					keepPlaceholderOnFocus={ true }
-					placeholder={ __( 'Overlay content' ) }
-					onChange={ ( newValue ) => setAttributes( { overlayContent: newValue } ) }
+					placeholder={ __( 'Image Label' ) }
+					onChange={ ( newValue ) => setAttributes( { imageLabel: newValue } ) }
 					tagName="p"
-					value={ overlayContent }
+					value={ imageLabel }
 				/>
 			</div>
 		);

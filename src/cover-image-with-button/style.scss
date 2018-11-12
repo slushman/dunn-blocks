@@ -5,10 +5,10 @@
 	background-size: cover;
 	color: #fff;
 	display: flex;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: 0 0 1.5em;
-	min-height: 400px;
 	position: relative;
 	width: 100%;
 
@@ -48,6 +48,130 @@
 
 	.overlay-content {
 		color: #fff;
+		margin-bottom: 0;
+		padding: 1em;
 		z-index: 1;
+	}
+
+	&.has-button .overlay-content {
+		@media (min-width: 1024px) {
+			transform: translateY(1.5em);
+			transition: all 0.5s ease;
+		}
+	}
+
+	&:active,
+	&:focus,
+	&:hover {
+		@media (min-width: 1024px) {
+
+			.cover-image-button-link {
+				opacity: 1;
+				transform: translateY(0%);
+				visibility: visible;
+			}
+			.overlay-content {
+				top: inherit;
+				transform: inherit;
+			}
+		}
+	}
+}
+
+.cover-image-button-link {
+	background-color: transparent;
+	border: 2px solid #fff;
+	color: #fff;
+	font-size: 0.85em;
+	padding: 0.5em 1em;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease;
+	z-index: 1;
+
+	@media (min-width: 1024px) {
+		opacity: 0;
+		transform: translateY(50%);
+		visibility: hidden;
+	}
+
+	&:visited {
+		color: #fff;
+	}
+
+	&:active,
+	&:focus,
+	&:hover {
+		background-color: currentColor;
+		color: currentColor;
+		text-decoration: underline;
+
+		.cover-image-button-text {
+			filter: invert(100%);
+		}
+	}
+}
+
+.cover-image-button-text {
+	text-transform: uppercase;
+}
+
+.image-label {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.no-padding {
+	&.wp-block-columns {
+		.wp-block-column {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		.wp-block-column + .wp-block-column,
+		.wp-block-column:first-child {
+			margin-left: 0;
+
+			@media (min-width: 600px) {
+				padding-right: 0.5em;
+			}
+		}
+
+		.wp-block-column:last-child {
+			padding-right: 0;
+		}
+	}
+	
+	.wp-block-column:not(:first-child) {
+		padding-left: 0;
+	}
+	.wp-block-column:not(:last-child) {
+		padding-right: 0;
+	}
+}
+
+.wp-block-columns {
+	&.has-4-columns,
+	&.has-5-columns,
+	&.has-6-columns {
+
+		@media (min-width: 600px) {
+			flex-direction: inherit;
+		}
+	}
+
+	&.has-6-columns {
+		@media (min-width: 450px) {
+			flex-direction: inherit;
+		}
+
+		.wp-block-column {
+			@media (min-width: 450px) {
+				flex-basis: 50%;
+			}
+
+			@media (min-width: 600px) {
+				flex-basis: 33%;
+			}
+		}
 	}
 }

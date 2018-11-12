@@ -24,10 +24,23 @@ const applyFallbackStyles = withFallbackStyles( ( node, ownProps ) => {
 	};
 } );
 
-const Inspector = ( { attributes, overlayColor, setAttributes, setOverlayColor } ) => {
-	const { overlayOpacity } = attributes;
+const Inspector = ( { attributes, fallbackOverlayColor, overlayColor, setAttributes, setOverlayColor } ) => {
+	const { blockHeight, buttonText, buttonUrl, overlayOpacity } = attributes;
 	return (
 		<InspectorControls>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Block Settings' ) }
+			>
+				<RangeControl
+					label={ __( 'Block Height' ) }
+					value={ blockHeight }
+					onChange={ ( newValue ) => setAttributes( { blockHeight: newValue } ) }
+					min={ 100 }
+					max={ 500 }
+					step={ 10 }
+				/>
+			</PanelBody>
 			<PanelColorSettings
 				title={ __( 'Overlay Settings' ) }
 				initialOpen={ false }
@@ -39,6 +52,14 @@ const Inspector = ( { attributes, overlayColor, setAttributes, setOverlayColor }
 					},
 				] }
 			>
+				<ContrastChecker
+					{ ...{
+						backgroundColor: overlayColor.color,
+						fallbackBackgroundColor: fallbackOverlayColor,
+						textColor: '#ffffff',
+					} }
+					fontSize="16"
+				/>
 				<RangeControl
 					label={ __( 'Overlay Opacity' ) }
 					value={ overlayOpacity }
@@ -48,6 +69,23 @@ const Inspector = ( { attributes, overlayColor, setAttributes, setOverlayColor }
 					step={ 10 }
 				/>
 			</PanelColorSettings>
+			<PanelBody
+				initialOpen={ false }
+				title={ __( 'Button Settings' ) }
+			>
+				<TextControl
+					label={ __( 'Button Text' ) }
+					help={ __( 'This text appears on the button when someone hovers over the image.' ) }
+					onChange={ newText => setAttributes( { buttonText: newText } ) }
+					value={ buttonText }
+				/>
+				<TextControl
+					label={ __( 'Button URL' ) }
+					help={ __( 'The URL for the button.' ) }
+					onChange={ newButtonUrl => setAttributes( { buttonUrl: newButtonUrl } ) }
+					value={ buttonUrl }
+				/>
+			</PanelBody>
 		</InspectorControls>
 	);
 };
