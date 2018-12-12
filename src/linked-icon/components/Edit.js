@@ -12,7 +12,7 @@ const iconSizeToClass = ( iconSize ) => {
 };
 
 const Edit = props => {
-	const { attributes, className, isSelected, setAttributes } = props;
+	const { attributes, className, setAttributes } = props;
 	const { icon, iconLabel, iconSize, iconType } = attributes;
 	const linkClasses = classNames( 'icon-link',
 		iconSizeToClass( iconSize ),
@@ -26,16 +26,14 @@ const Edit = props => {
 				{ 'dashicon' === iconType &&
 					<DashIcon icon={ icon } size={ iconSize } />
 				}
-				{ ( ! RichText.isEmpty( iconLabel ) || isSelected ) && (
-					<RichText
-						className="icon-label"
-						keepPlaceholderOnFocus={ true }
-						onChange={ ( newIconLabel ) => setAttributes( { iconLabel: newIconLabel } ) }
-						placeholder={ __( 'Icon Label' ) }
-						tagName="div"
-						value={ iconLabel }
-					/>
-				) }
+				<RichText
+					className="icon-label"
+					keepPlaceholderOnFocus={ true }
+					onChange={ ( newIconLabel ) => setAttributes( { iconLabel: newIconLabel } ) }
+					placeholder={ __( 'Icon Label' ) }
+					tagName="div"
+					value={ iconLabel }
+				/>
 			</div>
 		</div>
 	);

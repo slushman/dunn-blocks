@@ -26,7 +26,7 @@ function dunn_blocks_assets() {
 
 	wp_enqueue_style(
 		'dunn_blocks-css',
-		plugins_url( 'dunn-blocks/dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		plugin_dir_url( __FILE__ ) . 'dist/blocks.style.build.css', dirname( __FILE__ ),
 		array( 'wp-blocks' )
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
@@ -48,7 +48,7 @@ function dunn_blocks_editor_assets() {
 
 	wp_enqueue_script(
 		'dunn_blocks-js',
-		plugins_url( 'dunn-blocks/dist/blocks.build.js', dirname( __FILE__ ) ),
+		plugin_dir_url( __FILE__ ) . 'dist/blocks.build.js', dirname( __FILE__ ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
 		true
@@ -56,7 +56,7 @@ function dunn_blocks_editor_assets() {
 
 	wp_enqueue_style(
 		'dunn_blocks-editor-css',
-		plugins_url( 'dunn-blocks/dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		plugin_dir_url( __FILE__ ) . 'dist/blocks.editor.build.css', dirname( __FILE__ ),
 		array( 'wp-edit-blocks' )
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);

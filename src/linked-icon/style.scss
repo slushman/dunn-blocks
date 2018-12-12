@@ -2,11 +2,18 @@
 	text-align: center;
 }
 
-.icon-link svg,
-.icon-link svg.dashicon {
-	background-color: #333;
-	border-radius: 50%;
-	fill: #fff;
+.icon-link {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	svg,
+	svg.dashicon {
+		background-color: #333;
+		border-radius: 50%;
+		fill: #fff;
+	}
 }
 
 @for $i from 20 through 100 {

@@ -25,9 +25,7 @@ const Save = props => {
 				{ 'dashicon' === iconType &&
 					<DashIcon icon={ icon } size={ iconSize } />
 				}
-				{ ! RichText.isEmpty( iconLabel ) && (
-					<RichText.Content className="icon-label" tagName="div" value={ iconLabel } />
-				) }
+				<RichText.Content className="icon-label" tagName="div" value={ iconLabel } />
 			</a>
 		</div>
 	);
