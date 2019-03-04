@@ -72,17 +72,19 @@ class Edit extends Component {
 		return (
 			<div className={ containerClasses }>
 				<div className={ wrapperClasses } data-url={ imageUrl } style={ wrapperStyles }>
-					<RichText
-						className="overlay-content"
-						keepPlaceholderOnFocus={ true }
-						placeholder={ __( 'Overlay content' ) }
-						onChange={ ( newValue ) => setAttributes( { overlayContent: newValue } ) }
-						tagName="p"
-						value={ overlayContent }
-					/>
-					{ buttonText && buttonUrl &&
-						<Button text={ buttonText } url={ buttonUrl } />
-					}
+					<div className="color-hover">
+						<RichText
+							className="overlay-content"
+							keepPlaceholderOnFocus={ true }
+							placeholder={ __( 'Overlay content' ) }
+							onChange={ ( newValue ) => setAttributes( { overlayContent: newValue } ) }
+							tagName="p"
+							value={ overlayContent }
+						/>
+						{ buttonText && buttonUrl &&
+							<Button text={ buttonText } url={ buttonUrl } />
+						}
+					</div>
 				</div>
 				<RichText
 					className="image-label"

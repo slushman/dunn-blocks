@@ -5,7 +5,7 @@
  * Description: Blocks created for the Dunn Company website.
  * Author: slushman
  * Author URI: https://www.slushman.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *

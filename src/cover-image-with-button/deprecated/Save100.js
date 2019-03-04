@@ -1,21 +1,13 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { dimRatioToClass } from '../functions';
-import Button from './Button';
+import Button from '../components/Button';
 
-const { getColorClassName, RichText } = wp.editor;
+const { RichText } = wp.editor;
+const { getColorClassName } = wp.editor;
 
 const Save = ( { attributes, className } ) => {
-	const {
-		blockHeight,
-		buttonText,
-		buttonUrl,
-		imageLabel,
-		imageUrl,
-		overlayColor,
-		overlayContent,
-		overlayOpacity,
-	} = attributes;
+	const { blockHeight, buttonText, buttonUrl, imageLabel, imageUrl, overlayColor, overlayContent, overlayOpacity } = attributes;
 
 	const containerClasses = classNames(
 		className,
@@ -35,16 +27,14 @@ const Save = ( { attributes, className } ) => {
 	return (
 		<div className={ containerClasses }>
 			<div className={ wrapperClasses } data-url={ imageUrl } style={ wrapperStyle }>
-				<div className="color-hover">
-					<RichText.Content
-						className="overlay-content"
-						tagName="p"
-						value={ overlayContent }
-					/>
-					{ buttonText && buttonUrl &&
-						<Button text={ buttonText } url={ buttonUrl } />
-					}
-				</div>
+				<RichText.Content
+					className="overlay-content"
+					tagName="p"
+					value={ overlayContent }
+				/>
+				{ buttonText && buttonUrl &&
+					<Button text={ buttonText } url={ buttonUrl } />
+				}
 			</div>
 			<RichText.Content
 				className="image-label"

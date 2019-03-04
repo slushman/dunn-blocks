@@ -10,6 +10,7 @@ import './editor.scss';
 import Edit from './components/Edit';
 import Inspector from './components/Inspector';
 import Save from './components/Save';
+import Save100 from './deprecated/Save100';
 import attributes from './attributes';
 
 const { __ } = wp.i18n;
@@ -49,12 +50,20 @@ registerBlockType( 'dunn-blocks/cover-image-with-button', {
 			</Fragment>
 		);
 	},
-	save: ( props ) => {
-		return (
-			<Save
-				attributes={ props.attributes }
-				className={ props.className }
-			/>
-		);
-	},
+	save: ( props ) => (
+		<Save
+			attributes={ props.attributes }
+			className={ props.className }
+		/>
+	),
+	deprecated: [
+		{
+			save: ( props ) => (
+				<Save100
+					attributes={ props.attributes }
+					className={ props.className }
+				/>
+			),
+		}
+	],
 } );
